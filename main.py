@@ -21,8 +21,12 @@ def main():
 
     data_transform = get_simclr_data_transforms(**config['data_transforms'])
 
-    train_dataset = datasets.STL10('/home/thalles/Downloads/', split='train+unlabeled', download=True,
+    #Adding for Cifar 10 
+    train_dataset = datasets.CIFAR10('/home/thalles/Downloads/', download=True,
                                    transform=MultiViewDataInjector([data_transform, data_transform]))
+
+    #train_dataset = datasets.STL10('/home/thalles/Downloads/', split='train+unlabeled', download=True,
+                                   #transform=MultiViewDataInjector([data_transform, data_transform]))
 
     # online network
     online_network = ResNet18(**config['network']).to(device)
